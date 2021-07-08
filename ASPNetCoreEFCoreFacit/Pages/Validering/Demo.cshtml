@@ -1,0 +1,101 @@
+﻿@page
+@model ASPNetCoreEFCoreFacit.Pages.Validering.DemoModel
+@{
+}
+
+
+
+
+<div class="row">
+    <div class="col-lg-12 mb-5">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="h6 text-uppercase mb-0">Skapa ny kurs</h3>
+            </div>
+
+            <div class="card-body">
+                <form method="post">
+
+
+                    <div class="form-group">
+                        <label asp-for="Year2">Enter a good hockey year (Tre kronor vann VM)</label>
+                        <input asp-for="Year2" class="form-control" />
+                        <span asp-validation-for="Year2" class="field-validation-error"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="Namn">Namn</label>
+                        <input class="form-control" asp-for="Namn">
+                        <span asp-validation-for="Namn" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Beskrivning">Beskrivning</label>
+                        <textarea rows="5" cols="30"
+                                  class="form-control" asp-for="Beskrivning"></textarea>
+                        <span asp-validation-for="Beskrivning" class="field-validation-error"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="SelectDayOfWeek">Veckodag för föreläsningar</label>
+
+                        <select class="form-control" asp-for="SelectDayOfWeek"
+                                asp-items="@Model.AllDayOfWeeks"></select>
+
+                        @*<textarea rows="5" cols="30"
+            class="form-control" asp-for="Manufacturer"></textarea>*@
+                        <span asp-validation-for="SelectDayOfWeek" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Year"></label>
+                        <input asp-for="Year" class="form-control" />
+                        <span asp-validation-for="Year" class="field-validation-error"></span>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label asp-for="StartDay"></label>
+                        <input asp-for="StartDay" class="form-control" />
+                        <span asp-validation-for="StartDay" class="field-validation-error"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="Age"></label>
+                        <input asp-for="Age" class="form-control" />
+                        <span asp-validation-for="Age" class="field-validation-error"></span>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label asp-for="Password"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="field-validation-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PasswordAgain"></label>
+                        <input asp-for="PasswordAgain" class="form-control" />
+                        <span asp-validation-for="PasswordAgain" class="field-validation-error"></span>
+                    </div>
+
+
+
+                    <button type="submit" class="btn btn-primary">Spara</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

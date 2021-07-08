@@ -1,0 +1,88 @@
+﻿@page
+@model ASPNetCoreEFCoreFacit.Pages.Crud.BilarModel
+@{
+
+        string GetAscDescForColumn(string col)
+        {
+            if (col == Model.sortcolumn) //Klickar på samma som förra gpmgem
+            {
+                if (Model.sortorder == nameof(BilarModel.SortOrder.asc))
+                {
+                    return nameof(BilarModel.SortOrder.desc);
+                }
+                return nameof(BilarModel.SortOrder.asc);
+            }
+            return nameof(BilarModel.SortOrder.asc); //Klickar på ny kolumn
+        }
+
+}
+
+
+<div>
+    <form>
+        Sök: <input asp-for="q" class="form-control" />
+        <input type="submit" value="Sök" />
+    </form>
+
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="Bilar" asp-route-q="@Model.q" asp-route-sortorder="@GetAscDescForColumn(nameof(BilarModel.BilListViewModel.Regno))"  asp-route-sortcolumn="@nameof(BilarModel.BilListViewModel.Regno)">Reg no   
+                    @if (Model.sortcolumn == nameof(BilarModel.BilListViewModel.Regno))
+                    {
+                        <i class="fas fa-sort-@(Model.sortorder == nameof(BilarModel.SortOrder.asc) ? "up" : "down")"></i>
+                    }
+                </a>
+            </th>
+            <th>
+                <a asp-page="Bilar" asp-route-q="@Model.q" asp-route-sortorder="@GetAscDescForColumn(nameof(BilarModel.BilListViewModel.Manufacturer))" asp-route-sortcolumn="@nameof(BilarModel.BilListViewModel.Manufacturer)">
+                    Manufacturer
+                    @if (Model.sortcolumn == nameof(BilarModel.BilListViewModel.Manufacturer))
+                    {
+                        <i class="fas fa-sort-@(Model.sortorder == nameof(BilarModel.SortOrder.asc) ? "up" : "down")"></i>
+                    }
+                </a>
+            </th>
+            <th><a asp-page="Bilar" asp-route-q="@Model.q" asp-route-sortorder="@GetAscDescForColumn(nameof(BilarModel.BilListViewModel.Model))" asp-route-sortcolumn="@nameof(BilarModel.BilListViewModel.Model)">
+                Modell
+                @if (Model.sortcolumn == nameof(BilarModel.BilListViewModel.Model))
+                {
+                    <i class="fas fa-sort-@(Model.sortorder == nameof(BilarModel.SortOrder.asc) ? "up" : "down")"></i>
+                }
+
+            </a></th>
+            <th><a asp-page="Bilar" asp-route-q="@Model.q" asp-route-sortorder="@GetAscDescForColumn(nameof(BilarModel.BilListViewModel.Price))" asp-route-sortcolumn="@nameof(BilarModel.BilListViewModel.Price)">
+    Price
+    @if (Model.sortcolumn == nameof(BilarModel.BilListViewModel.Price))
+    {
+<i class="fas fa-sort-@(Model.sortorder == nameof(BilarModel.SortOrder.asc) ? "up" : "down")"></i>}
+
+</a></th>
+            <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var bilen in Model.Bilar)
+    {
+        <tr>
+            <td>@bilen.Regno</td>
+            <td>@bilen.Manufacturer</td>
+            <td>@bilen.Model</td>
+            <td>@bilen.Price</td>
+            <td>
+                <a asp-page="BilEdit" asp-route-id="@bilen.Id" class="btn btn-primary">Edit</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+    <tfooter>
+        <tr>
+            <td colspan="5">
+                <a asp-page="BilNew" class="btn btn-primary">Create new</a>
+            </td>
+        </tr>
+    </tfooter>
+</table>

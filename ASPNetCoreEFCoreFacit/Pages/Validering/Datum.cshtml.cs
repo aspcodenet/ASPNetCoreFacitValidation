@@ -26,8 +26,18 @@ namespace ASPNetCoreEFCoreFacit.Pages.Validering
 
         public IActionResult OnPost()
         {
+            try
+            {
+                new DateTime(Year, Month, Day);
+            }
+            catch (Exception a)
+            {
+                ModelState.AddModelError(nameof(Year),"Detta blir inget datum ju");
+            }
+
             if (ModelState.IsValid)
             {
+                //Spara
 
             }
 

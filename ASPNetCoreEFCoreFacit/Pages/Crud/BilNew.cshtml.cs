@@ -63,7 +63,8 @@ namespace ASPNetCoreEFCoreFacit.Pages.Crud
         {
             if (ModelState.IsValid)
             {
-                var b = _context.Bilar.Include(e => e.Manufacturer).First(r => r.Id == id);
+                var b = new Bil();
+                _context.Bilar.Add(b);
                 b.Model = Modell;
                 b.HasRadio = HasRadio;
                 b.Manufacturer = _context.Manufacturers.First(r=>r.Id == ManufacturerId);
@@ -71,7 +72,7 @@ namespace ASPNetCoreEFCoreFacit.Pages.Crud
                 b.RegNo = Regno;
                 b.Year = Year;
                 _context.SaveChanges();
-                return RedirectToPage("/Bilar");
+                return RedirectToPage("Bilar");
             }
 
             AllManufacturers = _context.Manufacturers.Select(e => new SelectListItem
@@ -84,17 +85,8 @@ namespace ASPNetCoreEFCoreFacit.Pages.Crud
 
         public void OnGet(int id)
         {
-            var b = _context.Bilar.Include(e => e.Manufacturer).First(r => r.Id == id);
-            Regno = b.RegNo;
-            ManufacturerId = b.Manufacturer.Id;
-            Modell = b.Model;
-            Price = b.Price;
-            HasRadio = b.HasRadio;
-            Year = b.Year;
 
-            FirstSalesDate = b.FirstSalesDate;
-            if(FirstSalesDate.Year < 1900)
-                FirstSalesDate = DateTime.Now;
+            FirstSalesDate = DateTime.Now;
 
 
             AllManufacturers = _context.Manufacturers.Select(e => new SelectListItem

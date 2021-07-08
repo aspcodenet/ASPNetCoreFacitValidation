@@ -21,41 +21,33 @@ namespace ASPNetCoreEFCoreFacit.Pages.Crud
             _context = context;
         }
 
-        [BindProperty]
-        [MaxLength(6)]
-        public string Regno { get; set; }
+        [BindProperty] [MaxLength(6)] public string Regno { get; set; }
 
-        [BindProperty]
-        public int ManufacturerId { get; set; }
-        [BindProperty]
-        public string Modell { get; set; }
+        [BindProperty] public int ManufacturerId { get; set; }
+        [BindProperty] public string Modell { get; set; }
 
-        [BindProperty]
-        [Range(1,1999999)]
-        public decimal Price { get; set; }
-        [BindProperty]
-        public bool HasRadio { get; set; }
+        [BindProperty] [Range(1, 1999999)] public decimal Price { get; set; }
+        [BindProperty] public bool HasRadio { get; set; }
 
         public List<SelectListItem> AllManufacturers { get; set; }
 
 
-        [BindProperty]
-        [Range(1950, 2025)]
-        public int Year { get; set; }
+        [BindProperty] [Range(1950, 2025)] public int Year { get; set; }
 
 
-        [BindProperty]
-        public DateTime FirstSalesDate { get; set; } //Dag och tid!
-        
+        [BindProperty] public DateTime FirstSalesDate { get; set; } //Dag och tid!
+
         [BindProperty]
         //[DataType(DataType.EmailAddress)]
         [EmailAddress]
         public string Email { get; set; }
-        
+
         [BindProperty]
         [DataType(DataType.Date)]
         public DateTime BirthDateForOwner { get; set; } //Dag
 
+        [BindProperty]
+        public bool Active { get; set; }
 
         public string Bild { get; set; }
 
@@ -70,6 +62,7 @@ namespace ASPNetCoreEFCoreFacit.Pages.Crud
                 b.Price = Price;
                 b.RegNo = Regno;
                 b.Year = Year;
+                b.Active = Active;
                 _context.SaveChanges();
                 return RedirectToPage("Bilar");
             }
@@ -91,6 +84,7 @@ namespace ASPNetCoreEFCoreFacit.Pages.Crud
             Price = b.Price;
             HasRadio = b.HasRadio;
             Year = b.Year;
+            Active = b.Active;
 
             FirstSalesDate = b.FirstSalesDate;
             if(FirstSalesDate.Year < 1900)

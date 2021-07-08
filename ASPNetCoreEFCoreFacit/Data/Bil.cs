@@ -24,5 +24,8 @@ namespace ASPNetCoreEFCoreFacit.Data
         public DateTime FirstSalesDate { get; set; } //Dag och tid!
         public string Email { get; set; }
         public DateTime BirthForOwnerDate { get; set; } //Dag
+
+
+        public bool Active { get; set; }
     }
 }

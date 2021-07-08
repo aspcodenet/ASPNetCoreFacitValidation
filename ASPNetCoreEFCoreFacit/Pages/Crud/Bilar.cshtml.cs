@@ -52,7 +52,7 @@ namespace ASPNetCoreEFCoreFacit.Pages.Crud
             if (string.IsNullOrEmpty(sortorder))
                 sortorder = nameof(SortOrder.asc);
 
-            var query = _context.Bilar.Select(r => new BilListViewModel
+            var query = _context.Bilar.Where(e=>e.Active).Select(r => new BilListViewModel
             {
                 Id = r.Id,
                 Manufacturer = r.Manufacturer.Namn,
